@@ -1,19 +1,28 @@
 import '@/styles/globals.css';
-import { Roboto, Roboto_Slab } from 'next/font/google';
-import { cn } from '@/lib/utils';
 
+import { cn } from '@/lib/utils';
+import { Roboto, Roboto_Slab } from 'next/font/google';
+
+// TODO: Add independent theme toggle
+import { ThemeProvider } from '@/lib/theme-provider';
+
+// Roboto Slab as the font for headings
 const robotoSlabHeading = Roboto_Slab({
   subsets: ['latin'],
   variable: '--font-heading',
 });
 
+// Roboto as the basic font
 const roboto = Roboto({ subsets: ['latin'], variable: '--font-sans' });
 
+// Props given to the RootLayout() function
 interface RootLayoutProps {
   children?: React.ReactNode;
 }
 
+// RootLayout() function used by the entire app
 export default function RootLayout(props: RootLayoutProps) {
+  // TODO: Setup <html> for i18n
   return (
     <html
       lang="en"
@@ -24,12 +33,21 @@ export default function RootLayout(props: RootLayoutProps) {
         roboto.variable,
         robotoSlabHeading.variable
       )}
+      suppressHydrationWarning={true}
     >
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </head>
-      <body>{props.children}</body>
+      {/* TODO: Replace <head> with export const metadata */}
+      <body>
+        {/* Theme provider for shadcn/ui components */}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {/* Children to be rendered provided as props */}
+          {props.children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
