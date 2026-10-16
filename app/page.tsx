@@ -1,6 +1,9 @@
-import { LoginForm } from '@/components/login-form';
+import Image from 'next/image';
 
 import { LucideActivity } from 'lucide-react';
+import { LoginForm } from '@/components/login-form';
+
+import loginPageImage from '@/assets/login-page-image.jpg';
 
 export default function LoginPage() {
   return (
@@ -26,10 +29,13 @@ export default function LoginPage() {
       </div>
       {/* Right section -- hidden till lg: */}
       <div className="bg-muted relative hidden lg:block">
-        <img
-          src="/placeholder.svg"
-          alt="Image"
-          className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+        <Image
+          loading="eager"
+          quality={75}
+          src={loginPageImage}
+          sizes="(min-width: 1024px) 50vw, 0vw"
+          alt="Abstract Photo by The New York Public Library on Unsplash"
+          className="absolute inset-0 h-full w-full object-cover dark:brightness-50 dark:grayscale"
         />
       </div>
     </div>

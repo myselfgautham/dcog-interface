@@ -26,13 +26,7 @@ export default function RootLayout(props: RootLayoutProps) {
   return (
     <html
       lang="en"
-      className={cn(
-        'font-sans',
-        'font-sans',
-        'font-sans',
-        roboto.variable,
-        robotoSlabHeading.variable
-      )}
+      className={cn('font-sans', roboto.variable, robotoSlabHeading.variable)}
       suppressHydrationWarning={true}
     >
       {/* TODO: Replace <head> with export const metadata */}

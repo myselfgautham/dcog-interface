@@ -24,7 +24,7 @@ export function LoginForm({
       <FieldGroup>
         {/* Large welcome text shown in bold */}
         <div className="flex flex-col items-start gap-1 text-center">
-          <h1 className="text-2xl font-bold">Let&apos;s get started! 👋</h1>
+          <h1 className="font-heading text-2xl">Let&apos;s get started! 👋</h1>
         </div>
         {/* Email address input field */}
         <Field>
