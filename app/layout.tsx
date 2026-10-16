@@ -17,7 +17,13 @@ export default function RootLayout(props: RootLayoutProps) {
   return (
     <html
       lang="en"
-      className={cn('font-sans', roboto.variable, robotoSlabHeading.variable)}
+      className={cn(
+        'font-sans',
+        'font-sans',
+        'font-sans',
+        roboto.variable,
+        robotoSlabHeading.variable
+      )}
     >
       <head>
         <meta charSet="utf-8" />
