@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { LucideActivity } from 'lucide-react';
+import { BrainCircuit } from 'lucide-react';
 import { LoginForm } from '@/components/login-form';
 
 import loginPageImage from '@/assets/login-page-image.jpg';
@@ -14,8 +14,7 @@ export default function LoginPage() {
         <div className="flex justify-start gap-2">
           <div className="flex items-center gap-2 text-lg font-medium">
             <div className="bg-primary text-primary-foreground flex size-7.5 items-center justify-center rounded-md">
-              {/* TODO: Come up with a better logo */}
-              <LucideActivity className="size-5" />
+              <BrainCircuit className="size-5" />
             </div>
             D.Cog.
           </div>
