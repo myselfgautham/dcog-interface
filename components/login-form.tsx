@@ -1,6 +1,7 @@
-// TODO: Add form submit handlers
+'use client';
 
 import { cn } from 'cn';
+import React from 'react';
 
 import {
   Field,
@@ -12,15 +13,43 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
-// TODO: Add a better passkey icon
 import { UserRoundKeyIcon } from 'lucide-react';
+
+import { login } from '@/lib/api/auth';
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<'form'>) {
+  // form submit event handler function
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // Stop page reload
+
+    // resolve the form data from target
+    const formData = new FormData(event.currentTarget);
+
+    // get the email and password from form data
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+
+    try {
+      // fetch the login endpoint with the data
+      const message = await login({ email, password });
+
+      // TODO: Process the fetch result
+      console.log(message);
+    } catch (error) {
+      console.error(error instanceof Error ? error.message : 'Login failed');
+    }
+  };
+
   return (
-    <form className={cn('flex flex-col gap-6', className)} {...props}>
+    <form
+      className={cn('flex flex-col gap-6', className)}
+      onSubmit={handleSubmit}
+      {...props}
+      autoComplete="on"
+    >
       <FieldGroup>
         {/* Large welcome text shown in bold */}
         <div className="flex flex-col items-start gap-1 text-center">
@@ -30,8 +59,9 @@ export function LoginForm({
         <Field>
           <FieldLabel htmlFor="email">Email Address</FieldLabel>
           <Input
-            id="email"
+            name="email"
             type="email"
+            autoComplete="username"
             placeholder="someone@example.com"
             required
           />
@@ -49,8 +79,9 @@ export function LoginForm({
             </a>
           </div>
           <Input
-            id="password"
+            name="password"
             type="password"
+            autoComplete="current-password"
             placeholder="••••••••••••"
             required
           />
