@@ -4,6 +4,8 @@ import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import { Roboto, Roboto_Slab } from 'next/font/google';
 
+import { Toaster } from '@/components/ui/sonner';
+
 // TODO: Add independent theme toggle
 import { ThemeProvider } from '@/lib/theme-provider';
 
@@ -61,6 +63,8 @@ export default function RootLayout(props: RootLayoutProps) {
         >
           {/* Children to be rendered provided as props */}
           {props.children}
+          {/* An opinionated toast component for React. */}
+          <Toaster position="top-right" richColors />
         </ThemeProvider>
       </body>
     </html>

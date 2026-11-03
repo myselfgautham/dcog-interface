@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 
 import { UserRoundKeyIcon } from 'lucide-react';
 
@@ -33,11 +34,27 @@ export function LoginForm({
     const password = formData.get('password') as string;
 
     try {
-      // fetch the login endpoint with the data
-      const message = await login({ email, password });
-
-      // TODO: Process the fetch result
-      console.log(message);
+      // initiate a dynamic sonner/toaster with a promise
+      toast.promise<string>(
+        // provide the async login function as the promise
+        login({ email, password }),
+        // configure the content strings for various states
+        {
+          // while the data is still loading
+          loading: 'Fetching login endpoint...',
+          // after the data has been fetched, display it.
+          success: (data) => data,
+          // in case of fetch or server errors
+          error: (error) => {
+            // HTTP error 401 - Unauthorized from server
+            if (error.message === 'API error: 401') {
+              return 'Invalid login credentials.';
+            }
+            // internal server errors like 500(s)
+            return 'Something went wrong!';
+          },
+        }
+      );
     } catch (error) {
       console.error(error instanceof Error ? error.message : 'Login failed');
     }
