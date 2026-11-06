@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   // retrieve the http-only cookie by its name
   const sessionToken = request.cookies.get('session_token')?.value;
 
@@ -24,7 +24,7 @@ export function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
-// define which paths this middleware runs on
+// define which paths this proxy runs on
 export const config = {
   matcher: ['/dashboard/:path*', '/'],
 };
