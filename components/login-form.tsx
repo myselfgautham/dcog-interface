@@ -2,6 +2,7 @@
 
 import { cn } from 'cn';
 import React from 'react';
+import { useRouter } from 'next/navigation';
 
 import {
   Field,
@@ -22,6 +23,9 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<'form'>) {
+  // initialize a next router for navigation
+  const router = useRouter();
+
   // form submit event handler function
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // Stop page reload
@@ -43,7 +47,14 @@ export function LoginForm({
           // while the data is still loading
           loading: 'Fetching login endpoint...',
           // after the data has been fetched, display it.
-          success: (data) => data,
+          success: (data) => {
+            // add a small delay so the user can read the sonner
+            setTimeout(() => {
+              // route the user to the dashboard after login
+              router.replace('/dashboard');
+            }, 1000); // 1000 ms = 1 s
+            return data;
+          },
           // in case of fetch or server errors
           error: (error) => {
             // HTTP error 401 - Unauthorized from server
